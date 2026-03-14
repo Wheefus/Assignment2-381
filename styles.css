@@ -189,6 +189,10 @@ form button,
     border-radius: 12px;
 }
 
+.ice_cream_tile:hover {
+    background-color: #ffffff;
+}
+
 .special_actions {
     margin-top: 10px;
 }
