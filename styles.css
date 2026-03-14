@@ -298,3 +298,25 @@ form button,
     gap: 12px;
     margin-top: 20px;
 }
+
+/*Part 1 CSS styling*/
+#cart_items {
+    width: 100%;
+}
+
+.cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #e4b48c;
+    border-radius: 12px;
+    padding: 8px 14px;
+    margin-top: 10px;
+}
+
+.cart h3 {
+    margin: 0;
+    font-size: 16px;
+}
+/**/
