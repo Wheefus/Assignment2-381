@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customize Order</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #timer { font-weight: bold; color: #d9534f; margin-bottom: 10px; }
+        #price-display { font-size: 1.2em; margin-top: 10px; font-weight: bold; }
+    </style>
 </head>
 
 <body>
     <header id="page_header">
-        <div>
-            <div><img src="img/logo.jpeg" alt="Sweet Scoop Ice Cream Logo"></div>
-        </div>
-
-        <div>
-            <h3>Sweet Scoop Ice Cream</h3>
-        </div>
+        <div><img src="img/logo.jpeg" alt="Sweet Scoop Ice Cream Logo"></div>
+        <div><h3>Sweet Scoop Ice Cream</h3></div>
     </header>
 
     <nav>
@@ -27,41 +25,104 @@
     </nav>
 
     <main class="customize_order_main">
-        
+        <!-- 1. Order Timer -->
+        <div id="timer">Order Time Left: <span id="time">10:00</span></div>
 
-        <form action="order_summary.html">
+        <form id="iceCreamForm" action="order_summary.html" onsubmit="return validateOrder()">
             <div>
-                <img src="img/icecream_banner.jpeg" alt="Banner image for customizing order" id="banner_img">
+                <img src="img/icecream_banner.jpeg" alt="Banner image" id="banner_img">
             </div>
 
             <h2>Vanilla Dream</h2>
-            <h3>Choose Type:</h3>
-
-            <input type="radio" id="type_cup" name="type" value="Cup">
+            <h3>Choose Type ($6.00):</h3>
+            <input type="radio" id="type_cup" name="iceCreamType" value="Cup">
             <label for="type_cup">Cup</label><br><br>
-            <input type="radio" id="type_cone" name="type" value="Cone">
+            <input type="radio" id="type_cone" name="iceCreamType" value="Cone">
             <label for="type_cone">Cone</label><br><br>
-            <button type="button" name="update_order" value="submit_icecream_type">Submit Selection</button>
 
             <h2>Chocolate Bliss</h2>
-            <h3>Select Toppings:</h3>
-
-            <input type="checkbox" id="topping1" name="topping1" value="Sprinkles">
+            <h3>Select Toppings (+$1.50 each):</h3>
+            <!-- Added class 'topping' for easy price calculation -->
+            <input type="checkbox" class="topping" id="topping1" name="topping" value="Sprinkles">
             <label for="topping1">Sprinkles</label><br><br>
-            <input type="checkbox" id="topping2" name="topping2" value="Chocolate Chips">
+            <input type="checkbox" class="topping" id="topping2" name="topping" value="Chocolate Chips">
             <label for="topping2">Chocolate Chips</label><br><br>
-            <input type="checkbox" id="topping3" name="topping3" value="Whipped Cream">
+            <input type="checkbox" class="topping" id="topping3" name="topping" value="Whipped Cream">
             <label for="topping3">Whipped Cream</label><br><br>
-            <button type="button" name="update_order" value="submit_toppings">Submit Selection</button>
+
+            <!-- 2. Price Display -->
+            <div id="price-display">Total Price: $6.00</div>
 
             <br>
             <button type="submit">Finish Order</button>
         </form>
     </main>
 
+    <script>
+    // 1. Timer Logic
+    let totalSeconds = 600;
+    const timerDisplay = document.getElementById('time');
+
+    const countdown = setInterval(() => {
+        let mins = Math.floor(totalSeconds / 60);
+        let secs = totalSeconds % 60;
+
+        // Ensure MM/SS format with leading zeros and a forward slash
+        let formattedMins = mins < 10 ? '0' + mins : mins;
+        let formattedSecs = secs < 10 ? '0' + secs : secs;
+
+        timerDisplay.textContent = `${formattedMins}:${formattedSecs}`;
+
+        if (totalSeconds <= 0) {
+            clearInterval(countdown);
+            timerDisplay.style.color = "red";
+            alert("Your order session has expired. Please refresh the page.");
+        } else {
+            totalSeconds--;
+        }
+    }, 1000);
+
+    // 2. Price Calculation Logic
+    const form = document.getElementById('iceCreamForm');
+    const priceDisplay = document.getElementById('price-display');
+
+    // Function to calculate and update the total price
+    function updatePrice() {
+        const basePrice = 6.00;
+        // Count how many checkboxes with the class 'topping' are checked
+        const toppingCount = document.querySelectorAll('.topping:checked').length;
+        const total = basePrice + (toppingCount * 1.50);
+        
+        priceDisplay.textContent = `Total Price: $${total.toFixed(2)}`;
+    }
+
+    // Listen for any change in the form (radio buttons or checkboxes)
+    form.addEventListener('change', updatePrice);
+
+    // 3. Selection Validation
+    function validateOrder() {
+        // Check if a radio button for Type (Cup/Cone) is selected
+        const typeSelected = document.querySelector('input[name="iceCreamType"]:checked');
+        // Check if at least one topping checkbox is selected
+        const toppingSelected = document.querySelector('.topping:checked');
+
+        if (!typeSelected) {
+            alert("Selection Missing: Please choose a base type (Cup or Cone).");
+            return false; // Prevents form submission
+        }
+
+        if (!toppingSelected) {
+            alert("Selection Missing: Please select at least one topping for your Chocolate Bliss.");
+            return false; // Prevents form submission
+        }
+
+        return true; // Allows form to submit to order_summary.html
+    }
+</script>
+
+
     <footer>
         <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
     </footer>
 </body>
-
 </html>
