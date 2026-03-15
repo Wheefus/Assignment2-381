@@ -8,7 +8,7 @@
     <title>Login</title>
 </head>
 
-<body>
+<body class="signupBack">
     <header id="page_header">
         <div>
             <div><img src="img/logo.jpeg" alt="Sweet Scoop Ice Cream Logo"></div>
@@ -49,6 +49,7 @@
                 <button id="signupbutton" onclick="window.location.href='signup.html'">Create an account</button>
 
             </form>
+            <div id="messageBox" class="message-box"></div>
         </div>
     </main>
 
@@ -60,6 +61,14 @@
 <script>
 
     const loginbutton = document.getElementById('loginbutton');
+
+    function showMessage(messages, type) {
+        const box = document.getElementById('messageBox');
+        box.className = 'message-box ' + (type === 'error' ? 'error-box' : 'success-box');
+        box.innerHTML = Array.isArray(messages) ? messages.join('<br>') : messages;
+        box.style.display = 'block';
+        type === 'error' ? box.className = 'error' : box.className = 'success';
+    }
 
     async function fetchData() {
         try {
@@ -81,17 +90,12 @@
 
         const user = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase() && u.email === passwordInput);
         if (user) {
-            document.getElementById('login_container').innerHTML = `
-            <h2>Welcome, ${user.name}!</h2>
-            <p>Redirecting to the menu...</p>
-            `;
+            showMessage("Welcome, " + user.name + "! Redirecting to menu...", "success");
             setTimeout(() => {
                 window.location.href = "menu_view.html";
             }, 2000);
         } else {
-            document.getElementById('login_container').innerHTML = `
-            <h2>Invalid username or password.</h2>
-            `;
+            showMessage("Invalid username or password. Please try again.", "error");
         }
     }
 

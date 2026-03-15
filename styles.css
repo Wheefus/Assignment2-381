@@ -135,7 +135,19 @@ footer {
 }
 
 #messageBox {
+    margin-top: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #e5a1a8;
     text-align: center;
+    font-size: 14px;
+    display: none;
+}
+.error {
+    background-color: #f8d7da;
+}
+.success {
+    background-color: #81C784;
 }
 
 .signupBack {
@@ -168,6 +180,19 @@ footer {
     text-align: center;
     justify-content: center;
     margin: 0 auto 70px;
+}
+
+.btn-signup {
+    background-color: #4CAF50;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    opacity: 0.5;
+}
+
+.btn-signup:hover {
+    opacity: 1.0;
+    background-color: #45A049;
 }
 
 #signup_form input[type="text"],
@@ -231,7 +256,7 @@ form button,
 }
 
 .ice_cream_tile:hover {
-    background-color: #ffffff;
+    background-color: #f1f1f1;
 }
 
 .special_actions {

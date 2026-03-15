@@ -67,7 +67,6 @@
         let mins = Math.floor(totalSeconds / 60);
         let secs = totalSeconds % 60;
 
-        // Ensure MM/SS format with leading zeros and a forward slash
         let formattedMins = mins < 10 ? '0' + mins : mins;
         let formattedSecs = secs < 10 ? '0' + secs : secs;
 
@@ -76,7 +75,8 @@
         if (totalSeconds <= 0) {
             clearInterval(countdown);
             timerDisplay.style.color = "red";
-            alert("Your order session has expired. Please refresh the page.");
+            //alert("Your order session has expired. Please refresh the page.");
+            window.location.href = "order_summary.html"
         } else {
             totalSeconds--;
         }
