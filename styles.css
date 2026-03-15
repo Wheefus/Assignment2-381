@@ -134,6 +134,47 @@ footer {
     background-color: #fff8ee;
 }
 
+#messageBox {
+    text-align: center;
+}
+
+.signupBack {
+    background-image: linear-gradient(to top, #ffffff, #65e8ff);
+    background-color: #ffffff;
+}
+
+.signup_main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#signup_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff8ee;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px 160px 10px 160px;
+}
+
+#signupForm {
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto 70px;
+}
+
+#signup_form input[type="text"],
+#signup_form input[type="password"] {
+    background-color: #fff8ee;
+}
+
 form button,
 .add_btn {
     background-color: #f28c8c;
@@ -244,7 +285,7 @@ form button,
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
-    padding: 20px;
+    padding: 20px 288px 20px 288px;
     background-color: #fff8ee;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -253,6 +294,14 @@ form button,
 .customize_order_main form button {
     display: block;
     margin: 12px auto;
+}
+
+#customize_order_img {
+    width: 40%;
+    height: 40%;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto;
 }
 
 .action_btn {
